@@ -22,7 +22,7 @@ def create_confirmation_keyboard(operation):
 
 
 def create_pagination_keyboard(count_pages, active_index=1, is_image=False):
-    keyboard = types.InlineKeyboardMarkup(row_width=count_pages)
+    keyboard = types.InlineKeyboardMarkup(row_width=count_pages // 2)
     if is_image:
         text_photo = '<Фото>'
         text_location = 'Место'
