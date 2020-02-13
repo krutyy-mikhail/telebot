@@ -166,9 +166,10 @@ def show_places(message):
 
         _, name, photo, latitude, longitude = places[0]
 
-        bot.send_location(chat_id=message.chat.id,
-                          latitude=latitude, longitude=longitude,
-                          reply_markup=keyboard)
+        bot.send_venue(chat_id=message.chat.id,
+                       latitude=latitude, longitude=longitude,
+                       reply_markup=keyboard, title=name,
+                       address=name)
     else:
         text = 'У Вас нет сохраненных мест.'
         bot.send_message(chat_id=message.chat.id, text=text)
@@ -206,9 +207,10 @@ def show_next_place(call):
             bot.send_photo(chat_id=message.chat.id, photo=photo,
                            reply_markup=keyboard, caption=name)
         else:
-            bot.send_location(chat_id=message.chat.id,
-                              latitude=latitude, longitude=longitude,
-                              reply_markup=keyboard)
+            bot.send_venue(chat_id=message.chat.id,
+                           latitude=latitude, longitude=longitude,
+                           reply_markup=keyboard, title=name,
+                           address=name)
     else:
         text = 'У Вас нет сохраненных мест.'
         bot.delete_message(chat_id=message.chat.id, message_id=message.message_id)
