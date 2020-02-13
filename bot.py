@@ -1,7 +1,7 @@
 from collections import defaultdict
-import re
+import os
 
-from telebot import apihelper, TeleBot
+from telebot import TeleBot
 import requests
 
 import storage
@@ -18,11 +18,9 @@ def update_place(user_id, key, value):
 
 # Initializing bot
 
-TOKEN = '870497401:AAHKxkNYPf-xwWqT6kyTJ7yPaL2AO1SHNqo'
-PROXIES = {'https': 'socks5://110.49.101.58:1080'}
-
+TOKEN = os.getenv('TELEGRAM_TOKEN')
 bot = TeleBot(TOKEN)
-apihelper.proxy = PROXIES
+
 
 # Handling command 'start'
 
@@ -133,8 +131,7 @@ def handle_confirmation(call):
         url_file = 'https://api.telegram.org/file/bot{0}/{1}'
 
         try:
-            photo = requests.get(url_file.format(TOKEN, photo_path),
-                                 proxies=PROXIES)
+            photo = requests.get(url_file.format(TOKEN, photo_path))
         except:
             text = 'Что то пошло не так, начните процесс ввода места заново.'
         else:
